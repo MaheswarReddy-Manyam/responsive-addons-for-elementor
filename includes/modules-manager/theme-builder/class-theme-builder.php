@@ -54,7 +54,7 @@ class RAEL_Theme_Builder {
 
 		$is_elementor_callable = ( defined( 'ELEMENTOR_VERSION' ) && is_callable( 'Elementor\Plugin::instance' ) ) ? true : false;
 
-		$compatibility_themes = array( 'astra' );
+		$compatibility_themes = array( 'astra', 'kadence', 'oceanwp' );
 
 		// If no match is found, set up fallback support.
 		if ( ! in_array( $this->template, $compatibility_themes ) ) {
@@ -348,6 +348,19 @@ class RAEL_Theme_Builder {
 
 		echo self::$elementor->frontend->get_builder_content_for_display( $single_page_id ); //phpcs:ignore
 
+		// // Check if we're in Elementor editor mode
+		// if (\Elementor\Plugin::$instance->editor->is_edit_mode() || \Elementor\Plugin::$instance->preview->is_preview_mode()) {
+		// 	error_log( 'in edit mode or preview mode' );
+		// 	// Output the content directly for Elementor editor
+		// 	// echo \Elementor\Plugin::$instance->frontend->get_builder_content_for_display($single_post_id, true);
+		// 	// the_content();
+		// 	echo wp_kses_post( apply_filters( 'the_content', get_the_content() ) );
+		// } else {
+		// 	// Frontend display
+		// 	error_log( 'frontend display' );
+			// echo \Elementor\Plugin::$instance->frontend->get_builder_content_for_display($single_page_id);
+		// }
+
 		return true;
 	}
 
@@ -367,9 +380,51 @@ class RAEL_Theme_Builder {
 		}
 
 		echo self::$elementor->frontend->get_builder_content_for_display( $single_post_id );//phpcs:ignore
+		// $content = self::$elementor->frontend->get_builder_content_for_display( $single_post_id );
+		// echo apply_filters( 'the_content', $content );
 
 		return true;
 	}
+
+	// public static function get_single_post_content() {
+	// 	$single_post_id = get_rael_single_post_id();
+	// 	error_log( 'single_post_id: ' . print_r( $single_post_id, true ) );
+	// 	if ( ! $single_post_id ) {
+	// 		return false;
+	// 	}
+	
+	// 	// Check if we're in Elementor editor mode
+	// 	if (\Elementor\Plugin::$instance->editor->is_edit_mode() || \Elementor\Plugin::$instance->preview->is_preview_mode()) {
+	// 		error_log( 'in edit mode or preview mode' );
+	// 		// Output the content directly for Elementor editor
+	// 		// echo \Elementor\Plugin::$instance->frontend->get_builder_content_for_display($single_post_id, true);
+	// 		// the_content();
+	// 		echo wp_kses_post( apply_filters( 'the_content', get_the_content() ) );
+	// 	} else {
+	// 		// Frontend display
+	// 		error_log( 'frontend display' );
+	// 		echo \Elementor\Plugin::$instance->frontend->get_builder_content_for_display($single_post_id);
+	// 	}
+	
+	// 	return true;
+	// }
+
+	// public static function get_single_post_content() {
+	// 	$single_post_id = get_rael_single_post_id();
+	
+	// 	if ( ! $single_post_id) {
+	// 		// Fallback to default content if no custom content exists
+	// 		// if ( function_exists( 'the_content' ) ) {
+	// 		// 	the_content();
+	// 		// }
+	// 		return false;
+	// 	}
+	
+	// 	// Always output Elementor content
+	// 	echo \Elementor\Plugin::$instance->frontend->get_builder_content_for_display($single_post_id);
+	
+	// 	return true;
+	// }
 
 	/**
 	 * Outputs the Error 404 template content.

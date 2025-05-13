@@ -82,7 +82,7 @@ class RAEL_Compatibility_Compat {
 	 * @return void
 	 */
 	public function override_single() {
-
+		error_log( 'RAEL_Compatibility_Compat::override_single() - Start' );
 		if ( is_404() ) {
 			require RAEL_DIR . 'themes/default/rael-header-footer-single.php';
 		}
